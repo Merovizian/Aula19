@@ -10,8 +10,12 @@ while True:
     if pessoas_dict['nome'].lower() == 'n':
         break
     # Cria a key 'sexo' e coloca o valor, logo apos resume o valor em um caracter upper ('M' ou 'F').
-    pessoas_dict['sexo'] = input(f"Informe o sexo de {pessoas_dict['nome']}: ")
-    pessoas_dict['sexo'] = pessoas_dict['sexo'].upper()[0]
+    while True:
+        pessoas_dict['sexo'] = input(f"Informe o sexo de {pessoas_dict['nome']}: ").upper()[0]
+        if pessoas_dict['sexo']  in 'FM':
+            break
+        print("Informe um valor correto")
+
     # cria a key 'idade' e pergunta ao usuario seu valor
     pessoas_dict['idade'] = int(input(f"Informe a idade de {pessoas_dict['nome']}: "))
     # adiciona na lista o dicionario criado

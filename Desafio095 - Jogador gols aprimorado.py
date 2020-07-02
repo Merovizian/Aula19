@@ -16,6 +16,7 @@ while True:
 3 - Detalhes de jogador.
 0 - Sair''')
     escolha = int(input(f"Escolha uma das opções acima: "))
+    # Retorna erro caso o usuario digite uma opçao errada
     if escolha not in range (0,4):
         print("\033[1;31mOpção Errada!\033[m")
         input("Pressione ENTER para continuar!")
@@ -38,46 +39,41 @@ while True:
         gols.clear()
         print(f"\033[1;34mO jogador {jogador['nome']} foi adicionado com sucesso!\033[m")
         input("Pressione ENTER para continuar...")
-
+    # Sai do menu
     if escolha == 0:
         break
-
+    # Menu 2
     if escolha == 2:
         print("-="*25)
-        print(f"cod {'nome':<10} {'gols':<20} {'total':>10}")
+        print("cod ",end='')
+        # For para listar as keys dos jogadores
+        for i in jogador.keys():
+            print(f"{(i):<15}",end='')
+        print()
+        # For para mostrar os valores das keys metodo 1
         for p, v in enumerate(lista_jogadores):
-            print(f"{p+1:<2} {v['nome']:<8} {v['gols']} {v['total']:>{int(30 - 3*len(v['gols']))}} ")
-        print("-="*25)
-        input("Pressione ENTER para continuar...")
+            print(f" {p+1:<2} {v['nome']:<10} {str(v['gols']):<20} {v['total']:>2} ")
+        print("-"*50)
+        # For para mostrar os valores das keys metodo 2
+        for p, v in enumerate(lista_jogadores):
+            print(f" {p+1:<2}",end=' ')
+            for k in v.values():
+                print(f"{str(k):<15}",end='')
+            print()
+        print("-=" * 25)
 
+        input("Pressione ENTER para continuar...")
+    # menu 3
     if escolha == 3:
         print('-'*40)
+        # pede ao usuario qual cod de jogador ele quer
         menu3 = int(input("Mostrar levantamento de qual jogador? "))
-        print(f"Levantmento do jogador {lista_jogadores[menu3-1]['nome']}")
-        for p, v in enumerate(lista_jogadores[menu3-1]['gols']):
-             print(f"No jogo {p+1} {lista_jogadores[menu3-1]['nome']} fez {v} gols.")
+        # compara o codigo dado com o tamanho da lista de jogadores
+        if menu3 > len(lista_jogadores):
+            print(f"Não existe jogador com o codigo informado!")
+        else:
+             # For para mostrar o jogador selecionado.
+             print(f"Levantmento do jogador {lista_jogadores[menu3-1]['nome']}")
+             for p, v in enumerate(lista_jogadores[menu3-1]['gols']):
+                print(f"No jogo {p+1} {lista_jogadores[menu3-1]['nome']} fez {v} gols.")
         input("Pressione ENTER para continuar...")
-
-
-
-
-'''
-# Mostra a lista completa com os dicionarios de cada jogador
-print('-='*20)
-for a in lista_jogadores:
-    print(a)
-print('-='*20)
-# Mostra cada key e seu respectivo valor
-for p, a in enumerate(lista_jogadores):
-    print('*'*10,a['nome'],'*'*10)
-    for p,v in a.items():
-        print(f"O campo {p} tem valor: {v}")
-print('-='*20)
-# Mostra, para cada jogador, seus gols em cada partida.
-for p, a in enumerate(lista_jogadores):
-    print(f"O jogador {a['nome']} jogou {partidas[p]} partidas" )
-    for k, v in enumerate(a['gols']):
-        print(f"==> Na partida {k+1} fez {v} gols")
-    print(f"Totalizando {a['total']} gols")
-
-'''
